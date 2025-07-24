@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useIconStore } from '@/stores/iconStore';
+import { useIconStore } from '@/stores/iconStore'
 
 const userId = ref('')
 const store = useIconStore()

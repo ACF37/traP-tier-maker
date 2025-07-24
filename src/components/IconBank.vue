@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useIconStore } from '@/stores/iconStore';
+import { useIconStore } from '@/stores/iconStore'
 
-const store = useIconStore();
+const store = useIconStore()
 </script>
 
 <template>
   <div class="icon-bank">
-    <img 
+    <img
       v-for="user in store.iconBankUsers"
       :key="user"
       :src="`https://q.trap.jp/api/v3/public/icon/${user}`"
