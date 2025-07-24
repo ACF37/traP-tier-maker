@@ -1,6 +1,18 @@
+<script setup lang="ts">
+import { useIconStore } from '@/stores/iconStore'
+
+const store = useIconStore()
+</script>
+
 <template>
   <div class="icon-bank">
-    <h3>アイコン置き場</h3>
+    <img
+      v-for="user in store.iconBankUsers"
+      :key="user"
+      :src="`https://q.trap.jp/api/v3/public/icon/${user}`"
+      :alt="user"
+      class="user-icon"
+    />
   </div>
 </template>
 
@@ -10,5 +22,12 @@
   border: 2px dashed #ccc;
   padding: 10px;
   margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.user-icon {
+  width: 60px;
+  height: 60px;
 }
 </style>
