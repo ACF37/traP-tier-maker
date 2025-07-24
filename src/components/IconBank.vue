@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { useIconStore } from '@/stores/iconStore'
+import draggable from 'vuedraggable'
 
 const store = useIconStore()
 </script>
 
 <template>
-  <div class="icon-bank">
-    <img
-      v-for="user in store.iconBankUsers"
-      :key="user"
-      :src="`https://q.trap.jp/api/v3/public/icon/${user}`"
-      :alt="user"
-      class="user-icon"
-    />
+  <div class="icon-bank-container">
+    <h3>アイコン置き場</h3>
+    <draggable v-model="store.tierData.iconBank" class="icon-bank" group="icons" item-key="user">
+      <template #item="{ element: user }">
+        <img :src="`https://q.trap.jp/api/v3/public/icon/${user}`" :alt="user" class="user-icon" />
+      </template>
+    </draggable>
   </div>
 </template>
 

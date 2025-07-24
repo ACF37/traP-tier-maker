@@ -2,17 +2,24 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useIconStore = defineStore('icon', () => {
-  const iconBankUsers = ref<string[]>([])
+  const tierData = ref({
+    iconBank: [] as string[],
+    S: [] as string[],
+    A: [] as string[],
+    B: [] as string[],
+    C: [] as string[],
+    D: [] as string[],
+  })
 
   async function addUser(userId: string) {
-    if (!userId || iconBankUsers.value.includes(userId)) {
+    if (!userId || Object.values(tierData.value).flat().includes(userId)) {
       return
     }
 
     try {
       const response = await fetch(`https://q.trap.jp/api/v3/public/icon/${userId}`)
       if (response.ok) {
-        iconBankUsers.value.push(userId)
+        tierData.value.iconBank.push(userId)
       } else {
         alert('ユーザーが見つかりません')
       }
@@ -22,5 +29,5 @@ export const useIconStore = defineStore('icon', () => {
     }
   }
 
-  return { iconBankUsers, addUser }
+  return { tierData, addUser }
 })
