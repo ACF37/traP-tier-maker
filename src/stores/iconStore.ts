@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useIconStore = defineStore('icon', () => {
@@ -29,5 +29,17 @@ export const useIconStore = defineStore('icon', () => {
     }
   }
 
-  return { tierData, addUser }
+  const asMarkdown = computed(() => {
+    let text = '## Tier表\n\n|Tier|Member|\n|-|-|\n'
+
+    const tiersToCopy = ['S', 'A', 'B', 'C', 'D'] as const
+    for (const tier of tiersToCopy) {
+      const users = tierData.value[tier]
+      const userIcons = users.map((u) => `:@${u}:`).join(' ')
+      text += `|${tier}| ${userIcons} |\n`
+    }
+    return text
+  })
+
+  return { tierData, addUser, asMarkdown }
 })
