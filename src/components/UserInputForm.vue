@@ -1,12 +1,29 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useIconStore } from '@/stores/iconStore'
+import { useToastStore } from '@/stores/toastStore'
 
 const userId = ref('')
 const store = useIconStore()
+const toastStore = useToastStore()
 
 async function handleAddUser() {
-  await store.addUser(userId.value)
+  for (const user of userId.value.split(' ')) {
+    if (!user) continue
+    const result = await store.addUser(user)
+    if (!result.success) {
+      switch (result.reason) {
+        case 'already_exists':
+          toastStore.showWarning('ユーザーが既に追加されているか、IDが無効です')
+          break
+        case 'invalid_id':
+          toastStore.showError(`無効なID: ${user}`)
+          break
+        default:
+          toastStore.showError(`ユーザー ${user} の追加に失敗しました`)
+      }
+    }
+  }
   userId.value = ''
 }
 </script>
