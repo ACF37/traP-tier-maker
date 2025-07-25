@@ -15,7 +15,7 @@ const store = useIconStore()
       class="bg-gray-50 rounded-lg border-2 border-dashed border-gray-300 hover:border-gray-400 transition-colors duration-200"
     >
       <draggable
-        v-model="store.tierData.iconBank"
+        v-model="store.tierData[0].users"
         class="min-h-[120px] p-4 flex flex-wrap gap-3"
         group="icons"
         item-key="user"

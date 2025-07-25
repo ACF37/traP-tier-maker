@@ -3,6 +3,7 @@ import UserInputForm from './components/UserInputForm.vue'
 import IconBank from './components/IconBank.vue'
 import TierList from './components/TierList.vue'
 import ShareButton from './components/ShareButton.vue'
+import ToastContainer from './components/ToastContainer.vue'
 </script>
 
 <template>
@@ -35,5 +36,8 @@ import ShareButton from './components/ShareButton.vue'
         <p>© 2025 traP Tier Maker - ドラッグ&ドロップでお気に入りのメンバーをランク付けしよう！</p>
       </div>
     </footer>
+
+    <!-- トーストコンテナ -->
+    <ToastContainer />
   </div>
 </template>

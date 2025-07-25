@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { useIconStore } from '@/stores/iconStore'
+import { useToastStore } from '@/stores/toastStore'
 
 const store = useIconStore()
+const toastStore = useToastStore()
 
 async function copyTierAsText() {
   try {
     await navigator.clipboard.writeText(store.asMarkdown)
-    alert('クリップボードにコピーしました！')
+    toastStore.showSuccess('クリップボードにコピーしました！')
   } catch (error) {
     console.error('コピーに失敗しました', error)
-    alert('コピーに失敗しました')
+    toastStore.showError('コピーに失敗しました')
   }
 }
 </script>

@@ -3,29 +3,27 @@ import { useIconStore } from '@/stores/iconStore'
 import draggable from 'vuedraggable'
 
 const store = useIconStore()
-const tiers = Object.keys(store.tierData).filter(
-  (key) => key !== 'iconBank',
-) as (keyof typeof store.tierData)[]
+const tiers = store.tierData.slice(1)
 </script>
 
 <template>
   <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
     <div class="space-y-3">
-      <div v-for="tier in tiers" :key="tier" class="group">
+      <div v-for="tier in tiers" :key="tier.id" class="group">
         <div
           class="flex items-stretch bg-gray-50 rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-all duration-200"
         >
           <div
             class="w-20 bg-gradient-to-r from-indigo-500 to-purple-600 text-white flex justify-center items-center font-bold text-lg shadow-inner"
           >
-            {{ tier }}
+            {{ tier.name }}
           </div>
           <div class="flex-grow bg-white border-l border-gray-200">
             <draggable
-              v-model="store.tierData[tier]"
+              v-model="tier.users"
               class="min-h-[100px] p-4 flex flex-wrap gap-3 hover:bg-gray-50 transition-colors duration-200"
               group="icons"
-              :item-key="tier"
+              :item-key="tier.name"
             >
               <template #item="{ element: user }">
                 <img
