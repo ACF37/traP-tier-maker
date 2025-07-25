@@ -9,57 +9,35 @@ const tiers = Object.keys(store.tierData).filter(
 </script>
 
 <template>
-  <div class="tier-list-container">
-    <div v-for="tier in tiers" :key="tier" class="tier-row">
-      <div class="tier-label">{{ tier }}</div>
-      <draggable
-        v-model="store.tierData[tier]"
-        class="tier-dropzone"
-        group="icons"
-        :item-key="tier"
-      >
-        <template #item="{ element: user }">
-          <img
-            :src="`https://q.trap.jp/api/v3/public/icon/${user}`"
-            :alt="user"
-            class="user-icon"
-          />
-        </template>
-      </draggable>
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <div class="space-y-3">
+      <div v-for="tier in tiers" :key="tier" class="group">
+        <div
+          class="flex items-stretch bg-gray-50 rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-all duration-200"
+        >
+          <div
+            class="w-20 bg-gradient-to-r from-indigo-500 to-purple-600 text-white flex justify-center items-center font-bold text-lg shadow-inner"
+          >
+            {{ tier }}
+          </div>
+          <div class="flex-grow bg-white border-l border-gray-200">
+            <draggable
+              v-model="store.tierData[tier]"
+              class="min-h-[100px] p-4 flex flex-wrap gap-3 hover:bg-gray-50 transition-colors duration-200"
+              group="icons"
+              :item-key="tier"
+            >
+              <template #item="{ element: user }">
+                <img
+                  :src="`https://q.trap.jp/api/v3/public/icon/${user}`"
+                  :alt="user"
+                  class="w-16 h-16 rounded-lg border-2 border-white shadow-md hover:shadow-lg transition-all duration-200 cursor-move hover:scale-105"
+                />
+              </template>
+            </draggable>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.tier-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-}
-
-.tier-label {
-  width: 50px;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  background-color: #eee;
-  border: 1px solid #ccc;
-}
-
-.tier-dropzone {
-  flex-grow: 1;
-  border: 1px solid #ccc;
-  min-height: 80px;
-  padding: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.user-icon {
-  width: 60px;
-  height: 60px;
-  cursor: move;
-}
-</style>
