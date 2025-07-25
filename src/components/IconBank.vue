@@ -24,7 +24,7 @@ const store = useIconStore()
           <img
             :src="`https://q.trap.jp/api/v3/public/icon/${user}`"
             :alt="user"
-            class="w-16 h-16 rounded-lg border-2 border-white shadow-md hover:shadow-lg transition-all duration-200 cursor-move hover:scale-105"
+            class="w-16 h-16 rounded-lg border-2 border-white shadow-md hover:shadow-lg cursor-move hover:scale-105"
           />
         </template>
       </draggable>
